@@ -1,0 +1,6 @@
+connexion==1.5.2
+pandas==0.23.1
+seaborn==0.8.1
+matplotlib==2.2.2
+scikit-learn==0.19.2
+sklearn==0.0
