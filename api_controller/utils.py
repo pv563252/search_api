@@ -22,7 +22,7 @@ def get_similar_videos(video_id):
     :return: List of json objects.
     """
     videos = pd.read_csv(os.getcwd().split('/api_controller')[0] + '/data/similar-clips.csv')
-    similar_videos = videos[videos['clip_id'] == video_id]['similar_clips'][0]
+    similar_videos = list(videos[videos['clip_id'] == video_id]['similar_clips'])[0]
     return build_schema(extract_similar_videos(similar_videos))
 
 
