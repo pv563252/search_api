@@ -1,4 +1,5 @@
 from api_controller import utils
+import flask
 import json
 
 
@@ -9,5 +10,7 @@ def get_similar_videos(videoId):
     :return: Similar Video JSON Objects
     """
     if utils.validate_video_id(videoId):
-        return json.dumps({'data': utils.get_similar_videos(videoId)}), 200, {'message': 'video not found'}
-    return 'Not Found', 404, {'x-error': 'video not found'}
+        data = utils.get_similar_videos(videoId)
+        response = {'data': data, 'videoId': videoId, 'count': len(data)}
+        return flask.jsonify(response), 200, {'message': 'Similar Videos found'}
+    return flask.jsonify('Not Found'), 404, {'x-error': 'video not found'}

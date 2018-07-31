@@ -34,6 +34,7 @@ def extract_similar_videos(similar_videos):
     """
     similar_videos = re.findall(r'\d+', similar_videos)
     similar_videos = [int(x) for x in similar_videos]
+    similar_videos.reverse()
     return similar_videos
 
 
@@ -44,14 +45,14 @@ def build_schema(similar_videos):
     :return: JSON Objects for Similar Videos
     """
     clips = pd.read_csv(os.getcwd().split('/api_controller')[0] + '/data/similar-staff-picks-challenge-clips_cleaned.csv')
-    clip_data = clips[clips['index_id'].isin(similar_videos)]
+    clip_data = clips[clips['index_id'].isin(similar_videos)].fillna('NA')
     return json_builder(clip_data)
 
 
 def json_builder(clip_data):
     """
     Build JSON Object
-    :param similar_videos: Pandas DataFrame Object
+    :param clip_data: Pandas DataFrame Object
     :return: JSON object
     """
     clip_data = clip_data[["id", "title", "caption", "thumbnail", "category_names"]]
