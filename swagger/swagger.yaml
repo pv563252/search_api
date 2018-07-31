@@ -1,0 +1,29 @@
+swagger: '2.0'
+info:
+  title: Similar Videos API
+  version: "0.1"
+  description: This is a sample Video API server
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /video/{videoId}:
+    get:
+      tags: [Similar Videos]
+      operationId: api_controller.videos.get_similar_videos
+      summary: Get top 10 Similar Videos
+      parameters:
+        - $ref: '#/parameters/videoId'
+      responses:
+        200:
+          description: Return Similar Videos JSON
+
+
+parameters:
+  videoId:
+    name: videoId
+    description: Video's Unique identifier
+    in: path
+    type: integer
+    required: true

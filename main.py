@@ -1,5 +1,10 @@
-import connexion
+import connexion, logging
 
-app = connexion.FlaskApp(__name__, specification_dir='swagger/')
-app.add_api('api.yaml')
-app.run(port=8088)
+logging.basicConfig(level=logging.INFO)
+app = connexion.App(__name__)
+app.add_api('swagger/swagger.yaml')
+application = app.app
+
+
+if __name__ == '__main__':
+    app.run(port=8050)
