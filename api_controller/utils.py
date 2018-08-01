@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import os
+import json
 
 
 def validate_video_id(video_id):
@@ -76,3 +77,19 @@ def json_processing(clip_data):
         del each['thumbnail']
         results.append(each)
     return results
+
+
+def write_locally(result):
+    """
+    Write Json result locally
+    :param result: Response Json Object
+    :return: True if executes correctly, False otherwise
+    """
+    try:
+        path = os.getcwd().split('/utils')[0] + '/results/' + str(result['videoId']) + '.json'
+        with open(path, 'w') as file:
+            json.dump(result, file)
+        return True
+    except Exception as e:
+        print(e)
+        return False

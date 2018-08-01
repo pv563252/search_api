@@ -12,5 +12,6 @@ def get_similar_videos(videoId):
     if utils.validate_video_id(videoId):
         data = utils.get_similar_videos(videoId)
         response = {'data': data, 'videoId': videoId, 'count': len(data)}
+        utils.write_locally(response)
         return flask.jsonify(response), 200, {'message': 'Similar Videos found'}
     return flask.jsonify('Not Found'), 404, {'x-error': 'video not found'}
